@@ -10,19 +10,28 @@ router.get("/practice", validateSession, function (req, res) {
 //* **CREATE LOG** *//
 router.post("/", validateSession, (req, res) => {
   const logEntry = {
+    date: req.body.log.date,
+    location: req.body.log.location,
+    trailName: req.body.log.trailName,
+    totalTrailLength: req.body.log.totalTrailLength,
+    totalMilesHiked: req.body.log.totalMilesHiked,
+    conditions: req.body.log.conditions,
+    foodConsumed: req.body.log.foodConsumed,
+    waterConsumed: req.body.log.waterConsumed,
     description: req.body.log.description,
-    definition: req.body.log.definition,
-    result: req.body.log.result,
     owner: req.user.id,
   };
   Log.create(logEntry)
     .then((log) => res.status(200).json(log))
-    .catch((err) => res.status(500).json({ error: err }));
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 //* **GET ALL ENTRIES** *//
-router.get("/", (req, res) => {
-  Log.findAll()
+router.get("/", validateSession, (req, res) => {
+  let userid = req.user.id;
+  Log.findAll({
+    where: { owner: userid },
+  })
     .then((logs) => res.status(200).json(logs))
     .catch((err) => res.status(500).json({ error: err }));
 });
@@ -40,9 +49,16 @@ router.get("/:id", validateSession, (req, res) => {
 //* **UPDATE** *//
 router.put("/update/:id", validateSession, function (req, res) {
   const updateLog = {
+    date: req.body.log.date,
+    location: req.body.log.location,
+    trailName: req.body.log.trailName,
+    totalTrailLength: req.body.log.totalTrailLength,
+    totalMilesHiked: req.body.log.totalMilesHiked,
+    conditions: req.body.log.conditions,
+    foodConsumed: req.body.log.foodConsumed,
+    waterConsumed: req.body.log.waterConsumed,
     description: req.body.log.description,
-    definition: req.body.log.definition,
-    result: req.body.log.result,
+    owner: req.user.id,
   };
 
   const query = { where: { id: req.params.id, owner: req.user.id } }; //goes by owner, then looks into the id (row of the table)

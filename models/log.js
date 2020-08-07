@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false, //won't allow null
     },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     trailName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,16 +24,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    food: {
-      type: DataTypes.STRING,
+    foodConsumed: {
+      type: DataTypes.STRING(2000),
       allowNull: false,
     },
-    water: {
-      type: DataTypes.STRING,
+    waterConsumed: {
+      type: DataTypes.STRING(2000),
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2000),
       allowNull: false,
     },
     owner: {
