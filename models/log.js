@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     //user is table name
     date: {
       //what type of column is this? you want a string. email is the name of the column
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       allowNull: false, //won't allow null
     },
     location: {
