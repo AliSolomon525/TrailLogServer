@@ -14,6 +14,6 @@ app.use(express.json());
 app.use("/api/user", user);
 app.use("/api/log", log);
 
-app.listen(3000, function () {
+app.listen(process.env.PORT, function () {
   console.log("app is listening on port 3000");
 });
