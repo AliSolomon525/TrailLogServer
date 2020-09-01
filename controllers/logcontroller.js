@@ -44,7 +44,7 @@ router.get("/:id", validateSession, (req, res) => {
   })
     .then((logs) => res.status(200).json(logs))
     .catch((err) => res.status(500).json({ error: err.message }));
-}); //LOLZ you can only pull the logs of the person that you're logged into
+});
 
 //* **UPDATE** *//
 router.put("/update/:id", validateSession, function (req, res) {
